@@ -1,6 +1,7 @@
 ---
 title: Welcome to Alex_notes
 About: Carbon Life x Silicon Mind
+draft: false
 ---
 
 # Digital Garden & BCI Lab
