@@ -37,7 +37,8 @@ Brain-computer interface (BCI) - системы, которые уже сего�
 * [[data-processing]] — Методы обработки сигналов (DSP) для чайников и профи.%%
 
 #### 🧬Биохимия нашего поведения
-* [[Hormones]]
+* [[Hormones_Introduction]]
+* [[Brain, women, hormones]]
 
 ####  ⚛ О физике как о жизни
  Физическая философия. Делюсь мыслями. 
