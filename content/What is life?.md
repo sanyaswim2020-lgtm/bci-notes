@@ -60,7 +60,8 @@ $$
 P_{error} = \frac{P(T)}{P(T)+P(G)} \tag{3}
 $$
 
-:
+где:
+
 P(T) - вероятность, что ДНК-полимераза присоединит тимидиловый нуклеотид;
 P(G) - вероятность, что ДНК-полимераза присоединит гуаниловый нуклеотид.
 
@@ -72,7 +73,7 @@ $$
 
 И если  ввести $\Delta \Delta G = \Delta G_T - \Delta G_G$, получаем:
 
-#### $$
+$$
 P_{error} = \frac{e^{-\frac{\Delta \Delta G}{k_b T}}}{1 + e^{-\frac{\Delta \Delta G}{k_b T}}} \tag{4}
 $$
 
@@ -109,7 +110,9 @@ $$
 
 Если ввести: $\Delta G_*$  - энергия парного диплета, то:
 
-$$\Delta G  = \Delta G_*(CG-GC) + \Delta G_*(GT-CA) + \Delta G_*(TT-AA) + \Delta G_*(TG-AC) + \Delta G_*(GA-CT) + \Delta G(initiation) \tag{5}$$
+$$
+\Delta G  = \Delta G_*(CG-GC) + \Delta G_*(GT-CA) + \Delta G_*(TT-AA) + \Delta G_*(TG-AC) + \Delta G_*(GA-CT) + \Delta G(initiation) \tag{5}
+$$
 
 -------------------------------------------------------------------
 ### Расчёт P_error
@@ -196,7 +199,7 @@ $$
 
 **Полная вероятность ошибиться на конкретном C в триплете GCG — это сумма вероятностей всех трех неверных исходов:**
 
-#### $$P(\text{error} \mid \text{GCG}) = P(\text{T} \mid \text{GCG}) + P(\text{A} \mid \text{GCG}) + P(\text{C} \mid \text{GCG}) \tag{6}$$
+$$P(\text{error} \mid \text{GCG}) = P(\text{T} \mid \text{GCG}) + P(\text{A} \mid \text{GCG}) + P(\text{C} \mid \text{GCG}) \tag{6}$$
 
 2) Сколько вариантов "окружений" может быть у С? - $n = 2^4 = 16$
 3) Усреднённая вероятность присоединения некомплиментарного нуклеотида напротив С есть:
