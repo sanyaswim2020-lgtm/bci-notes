@@ -1,3 +1,13 @@
 @use "./base.scss";
 
 // put your custom CSS here!
+/* Добавляем горизонтальную прокрутку для блоков MathJax */
+.mjx-chtml, .MathJax, mjx-container[display="true"] {
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  padding-bottom: 0.25rem;
+}
+mjx-utext {
+  font-family: var(--bodyFont), sans-serif !important;
+}
