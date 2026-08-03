@@ -68,7 +68,7 @@ P(G) - вероятность, что ДНК-полимераза присоед
 Подставим (2) в (3):
 
 $$
-P_{error} = \frac{e^{\dfrac{-\Delta G_T}{k_b*T}}}{e^{\dfrac{-\Delta G_T}{k_b*T}} + e^{\dfrac{-\Delta G_G}{k_b*T}}}
+P_{error} = \frac{e^{\dfrac{-\Delta G_T}{k_bT}}}{e^{\dfrac{-\Delta G_T}{k_bT}} + e^{\dfrac{-\Delta G_G}{k_bT}}}
 $$
 
 И если  ввести $\Delta \Delta G = \Delta G_T - \Delta G_G$, получаем:
@@ -111,7 +111,10 @@ $$
 Если ввести: $\Delta G_*$  - энергия парного диплета, то:
 
 $$
-\Delta G  = \Delta G_*(CG-GC) + \Delta G_*(GT-CA) + \Delta G_*(TT-AA) + \Delta G_*(TG-AC) + \Delta G_*(GA-CT) + \Delta G(initiation) \tag{5}
+\begin{aligned}
+\Delta G = &\;\Delta G_*(CG-GC) + \Delta G_*(GT-CA) + \Delta G_*(TT-AA) \\
+& + \Delta G_*(TG-AC) + \Delta G_*(GA-CT) + \Delta G(\text{initiation})
+\end{aligned} \tag{5}
 $$
 
 -------------------------------------------------------------------
@@ -133,9 +136,13 @@ $$
 
 Формулы и данные из статей, которые использованы в коде ниже:
 1) $\Delta G(GCG-CTC) = 1.02$ ккал/моль (Table 3 (2)) 
+
 2) $\Delta G(GCG-CGC) = \Delta G(GC-CG) + \Delta G(CG-GC)$
+
 где:
+
 $\Delta G(GC-CG)=-2.24$ ккал/моль (Table 1 (1))
+
 $\Delta G(CG-GC)=-2.17$ ккал/моль (Table 1 (1))
 
 Рассчитаем $P_{error}$ (формула (4)), где:
@@ -378,7 +385,7 @@ $$
 Дальше, полимераза может отщепить присоединившийся НМФ (экзонуклеазная активность), если после присоединения, но до того, как полимераза сдвинулась на следующее место, в её активном центре возникла деформация из-за взаимодействия некомплиментарных оснований. Вероятность гидролиза присоединенного НМФ также зависит от $\Delta \Delta G$ и подчиняются Больцману: 
 
 $$
-P_{error} = \frac{e^{-\frac{\Delta \Delta G}{k_B T}}}{1 + e^{-\frac{\Delta \Delta G}{k_B T}}} \tag{4}
+P_{error} = \dfrac{e^{-\dfrac{\Delta \Delta G}{k_B T}}}{1 + e^{-\dfrac{\Delta \Delta G}{k_B T}}} \tag{4}
 $$
 
 
