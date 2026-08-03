@@ -11,3 +11,18 @@
 mjx-utext {
   font-family: var(--bodyFont), sans-serif !important;
 }
+/* Зажимаем ширину математических блоков, чтобы они не залезали под Graph View */
+.cm-embed-block,
+mjx-container[display="true"] {
+  display: block !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* Ограничиваем контейнер самой статьи */
+article {
+  overflow-x: hidden; /* Обрезает всё, что пытается вылезти за пределы контентной области */
+}
