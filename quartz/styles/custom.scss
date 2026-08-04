@@ -25,21 +25,13 @@ mjx-utext {
 }
 
 // ---------------------------------------------------------
-// 2. ЦЕНТРИРОВАНИЕ И ПРОКРУТКА MATHJAX (SVG / CHTML)
+// 2. БЛОЧНЫЕ ФОРМУЛЫ ($$ ... $$) -> ЦЕНТРИРОВАНИЕ И СКРОЛЛ
 // ---------------------------------------------------------
 
-/* Внешние обёртки Markdown-пайплайна Quartz */
+/* Строго ограничиваем селекторы блочными элементами и атрибутом [display="true"],
+   чтобы правила не применялись к строчным формулам */
 .math.math-display,
-div.math {
-  display: flex !important;
-  justify-content: center !important;
-  width: 100% !important;
-  margin: 1rem 0 !important;
-}
-
-/* Основной контейнер MathJax: задаём Flexbox-центрирование и горизонтальный скролл */
-.mjx-chtml,
-.MathJax,
+div.math,
 mjx-container[display="true"],
 mjx-container[jax="CHTML"][display="true"],
 mjx-container[jax="SVG"][display="true"] {
@@ -55,8 +47,7 @@ mjx-container[jax="SVG"][display="true"] {
   box-sizing: border-box !important;
 }
 
-/* Внутренний холст формулы (SVG или CHTML-узел):
-   Принудительно центрируем сам блок через auto-отступы на случай сбоя Flexbox */
+/* Внутренний холст блочной формулы */
 mjx-container[display="true"] > svg,
 mjx-container[display="true"] > mjx-math,
 mjx-container[display="true"] > .mjx-chtml {
@@ -64,4 +55,21 @@ mjx-container[display="true"] > .mjx-chtml {
   margin-left: auto !important;
   margin-right: auto !important;
   max-width: 100% !important;
+}
+
+// ---------------------------------------------------------
+// 3. СТРОЧНЫЕ ФОРМУЛЫ ($ ... $) -> ЖЁСТКАЯ ФИКСАЦИЯ В ПОТОКЕ
+// ---------------------------------------------------------
+
+/* Принудительно возвращаем строчные формулы в строку текста,
+   отключая центрирование и растягивание на 100% ширины */
+.math.math-inline,
+span.math,
+mjx-container:not([display="true"]) {
+  display: inline-block !important;
+  width: auto !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  vertical-align: middle !important;
 }
