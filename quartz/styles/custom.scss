@@ -1,20 +1,17 @@
 @use "./base.scss";
 
-// ---------------------------------------------------------
-// 1. ГЛОБАЛЬНЫЕ ОГРАНИЧЕНИЯ И ШРИФТЫ
-// ---------------------------------------------------------
+/* =========================================================
+   1. ГЛОБАЛЬНАЯ ЗАЩИТА КОНТЕНТА
+   ========================================================= */
 
-/* Обрезаем всё, что выходит за пределы контентной области статьи */
 article {
   overflow-x: hidden;
 }
 
-/* Кастомный шрифт для текстовых элементов внутри формул */
 mjx-utext {
   font-family: var(--bodyFont), sans-serif !important;
 }
 
-/* Зажимаем ширину встраиваемых блоков, чтобы они не ломали вёрстку/Graph View */
 .cm-embed-block {
   display: block !important;
   max-width: 100% !important;
@@ -24,30 +21,29 @@ mjx-utext {
   box-sizing: border-box !important;
 }
 
-// ---------------------------------------------------------
-// 2. БЛОЧНЫЕ ФОРМУЛЫ ($$ ... $$) -> ЦЕНТРИРОВАНИЕ И СКРОЛЛ
-// ---------------------------------------------------------
+/* =========================================================
+   2. БЛОЧНЫЕ ФОРМУЛЫ ($$ ... $$) -> ЖЁСТКОЕ ЦЕНТРИРОВАНИЕ
+   ========================================================= */
 
-/* Строго ограничиваем селекторы блочными элементами и атрибутом [display="true"],
-   чтобы правила не применялись к строчным формулам */
+/* Заставляем все обёртки дисплейного математического блока занимать 100% ширины */
 .math.math-display,
 div.math,
-mjx-container[display="true"],
-mjx-container[jax="CHTML"][display="true"],
-mjx-container[jax="SVG"][display="true"] {
+p > mjx-container[display="true"],
+mjx-container[display="true"] {
   display: flex !important;
+  flex-direction: row !important;
   justify-content: center !important;
   align-items: center !important;
   width: 100% !important;
   max-width: 100% !important;
-  margin: 1rem auto !important;
-  padding-bottom: 0.25rem !important;
+  margin: 1.2rem auto !important;
+  padding: 0.25rem 0 !important;
   overflow-x: auto !important;
   overflow-y: hidden !important;
   box-sizing: border-box !important;
 }
 
-/* Внутренний холст блочной формулы */
+/* Центрируем внутренний SVG / CHTML узел, если MathJax генерирует фиксированную ширину */
 mjx-container[display="true"] > svg,
 mjx-container[display="true"] > mjx-math,
 mjx-container[display="true"] > .mjx-chtml {
@@ -57,19 +53,20 @@ mjx-container[display="true"] > .mjx-chtml {
   max-width: 100% !important;
 }
 
-// ---------------------------------------------------------
-// 3. СТРОЧНЫЕ ФОРМУЛЫ ($ ... $) -> ЖЁСТКАЯ ФИКСАЦИЯ В ПОТОКЕ
-// ---------------------------------------------------------
+/* =========================================================
+   3. СТРОЧНЫЕ ФОРМУЛЫ ($ ... $) -> ИЗОЛЯЦИЯ ОТ БЛОКОВ
+   ========================================================= */
 
-/* Принудительно возвращаем строчные формулы в строку текста,
-   отключая центрирование и растягивание на 100% ширины */
+/* Исключаем любое влияние flexbox-центрирования на строчные элементы */
 .math.math-inline,
 span.math,
-mjx-container:not([display="true"]) {
+mjx-container:not([display="true"]),
+mjx-container[display="false"] {
   display: inline-block !important;
   width: auto !important;
   max-width: none !important;
   margin: 0 !important;
   padding: 0 !important;
   vertical-align: middle !important;
+  text-align: left !important;
 }
