@@ -1,9 +1,6 @@
 @use "./base.scss";
 
-/* =========================================================
-   1. ГЛОБАЛЬНАЯ ЗАЩИТА КОНТЕНТА
-   ========================================================= */
-
+/* 1. Глобальная защита от горизонтального переполнения */
 article {
   overflow-x: hidden;
 }
@@ -12,61 +9,27 @@ mjx-utext {
   font-family: var(--bodyFont), sans-serif !important;
 }
 
-.cm-embed-block {
-  display: block !important;
-  max-width: 100% !important;
-  width: 100% !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-  box-sizing: border-box !important;
-}
-
-/* =========================================================
-   2. БЛОЧНЫЕ ФОРМУЛЫ ($$ ... $$) -> ЖЁСТКОЕ ЦЕНТРИРОВАНИЕ
-   ========================================================= */
-
-/* Заставляем все обёртки дисплейного математического блока занимать 100% ширины */
-.math.math-display,
-div.math,
-p > mjx-container[display="true"],
+/* 2. БЛОЧНЫЕ ФОРМУЛЫ ($$ ... $$) -> Центрирование через margin тега <svg> */
 mjx-container[display="true"] {
-  display: flex !important;
-  flex-direction: row !important;
-  justify-content: center !important;
-  align-items: center !important;
+  display: block !important;
   width: 100% !important;
-  max-width: 100% !important;
-  margin: 1.2rem auto !important;
-  padding: 0.25rem 0 !important;
+  margin: 1.5rem 0 !important;
   overflow-x: auto !important;
   overflow-y: hidden !important;
-  box-sizing: border-box !important;
 }
 
-/* Центрируем внутренний SVG / CHTML узел, если MathJax генерирует фиксированную ширину */
-mjx-container[display="true"] > svg,
-mjx-container[display="true"] > mjx-math,
-mjx-container[display="true"] > .mjx-chtml {
+/* Ключевой фикс: центрируем сам SVG-блок внутри контейнера 100% ширины */
+mjx-container[display="true"] > svg {
   display: block !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+  margin: 0 auto !important;
   max-width: 100% !important;
 }
 
-/* =========================================================
-   3. СТРОЧНЫЕ ФОРМУЛЫ ($ ... $) -> ИЗОЛЯЦИЯ ОТ БЛОКОВ
-   ========================================================= */
-
-/* Исключаем любое влияние flexbox-центрирования на строчные элементы */
-.math.math-inline,
-span.math,
-mjx-container:not([display="true"]),
-mjx-container[display="false"] {
+/* 3. СТРОЧНЫЕ ФОРМУЛЫ ($ ... $) -> Жёсткая фиксация в строке */
+mjx-container:not([display="true"]) {
   display: inline-block !important;
   width: auto !important;
   max-width: none !important;
   margin: 0 !important;
   padding: 0 !important;
-  vertical-align: middle !important;
-  text-align: left !important;
 }
