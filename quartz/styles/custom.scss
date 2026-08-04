@@ -1,15 +1,26 @@
 @use "./base.scss";
 
-/* 1. Глобальная защита от горизонтального переполнения */
-article {
-  overflow-x: hidden;
-}
+/* =========================================================
+   1. ГЛОБАЛЬНЫЕ ШРИФТЫ И ЗАЩИТА ВСТРАИВАЕМЫХ БЛОКОВ
+   ========================================================= */
 
 mjx-utext {
   font-family: var(--bodyFont), sans-serif !important;
 }
 
-/* 2. БЛОЧНЫЕ ФОРМУЛЫ ($$ ... $$) -> Центрирование через margin тега <svg> */
+.cm-embed-block {
+  display: block !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* =========================================================
+   2. БЛОЧНЫЕ ФОРМУЛЫ ($$ ... $$) -> ЦЕНТРИРОВАНИЕ ТЕГА <svg>
+   ========================================================= */
+
 mjx-container[display="true"] {
   display: block !important;
   width: 100% !important;
@@ -18,14 +29,16 @@ mjx-container[display="true"] {
   overflow-y: hidden !important;
 }
 
-/* Ключевой фикс: центрируем сам SVG-блок внутри контейнера 100% ширины */
 mjx-container[display="true"] > svg {
   display: block !important;
   margin: 0 auto !important;
   max-width: 100% !important;
 }
 
-/* 3. СТРОЧНЫЕ ФОРМУЛЫ ($ ... $) -> Жёсткая фиксация в строке */
+/* =========================================================
+   3. СТРОЧНЫЕ ФОРМУЛЫ ($ ... $) -> ФИКСАЦИЯ В СТРОКЕ
+   ========================================================= */
+
 mjx-container:not([display="true"]) {
   display: inline-block !important;
   width: auto !important;
