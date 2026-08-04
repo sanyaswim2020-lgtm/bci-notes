@@ -26,3 +26,9 @@ mjx-container[display="true"] {
 article {
   overflow-x: hidden; /* Обрезает всё, что пытается вылезти за пределы контентной области */
 }
+
+mjx-container[display="true"] {
+  display: block !important;
+  text-align: center !important;
+  margin: 1rem auto !important;
+}
