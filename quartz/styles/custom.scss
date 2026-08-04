@@ -1,19 +1,21 @@
 @use "./base.scss";
 
-// put your custom CSS here!
-/* Добавляем горизонтальную прокрутку для блоков MathJax */
-.mjx-chtml, .MathJax, mjx-container[display="true"] {
-  max-width: 100% !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-  padding-bottom: 0.25rem;
+// ---------------------------------------------------------
+// 1. ГЛОБАЛЬНЫЕ ОГРАНИЧЕНИЯ И ШРИФТЫ
+// ---------------------------------------------------------
+
+/* Обрезаем всё, что выходит за пределы контентной области статьи */
+article {
+  overflow-x: hidden;
 }
+
+/* Кастомный шрифт для текстовых элементов внутри формул */
 mjx-utext {
   font-family: var(--bodyFont), sans-serif !important;
 }
-/* Зажимаем ширину математических блоков, чтобы они не залезали под Graph View */
-.cm-embed-block,
-mjx-container[display="true"] {
+
+/* Зажимаем ширину встраиваемых блоков, чтобы они не ломали вёрстку/Graph View */
+.cm-embed-block {
   display: block !important;
   max-width: 100% !important;
   width: 100% !important;
@@ -22,13 +24,44 @@ mjx-container[display="true"] {
   box-sizing: border-box !important;
 }
 
-/* Ограничиваем контейнер самой статьи */
-article {
-  overflow-x: hidden; /* Обрезает всё, что пытается вылезти за пределы контентной области */
+// ---------------------------------------------------------
+// 2. ЦЕНТРИРОВАНИЕ И ПРОКРУТКА MATHJAX (SVG / CHTML)
+// ---------------------------------------------------------
+
+/* Внешние обёртки Markdown-пайплайна Quartz */
+.math.math-display,
+div.math {
+  display: flex !important;
+  justify-content: center !important;
+  width: 100% !important;
+  margin: 1rem 0 !important;
 }
 
-mjx-container[display="true"] {
-  display: block !important;
-  text-align: center !important;
+/* Основной контейнер MathJax: задаём Flexbox-центрирование и горизонтальный скролл */
+.mjx-chtml,
+.MathJax,
+mjx-container[display="true"],
+mjx-container[jax="CHTML"][display="true"],
+mjx-container[jax="SVG"][display="true"] {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 100% !important;
   margin: 1rem auto !important;
+  padding-bottom: 0.25rem !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* Внутренний холст формулы (SVG или CHTML-узел):
+   Принудительно центрируем сам блок через auto-отступы на случай сбоя Flexbox */
+mjx-container[display="true"] > svg,
+mjx-container[display="true"] > mjx-math,
+mjx-container[display="true"] > .mjx-chtml {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 100% !important;
 }
